@@ -1,0 +1,25 @@
+{
+  "name": "@omnedia/ngx-lightning",
+  "description": "An Angular library that renders a performant animated lightning/electricity effect using WebGL.",
+  "version": "1.0.0",
+  "peerDependencies": {
+    "@angular/common": "^18.0.0",
+    "@angular/core": "^18.0.0"
+  },
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "sideEffects": false,
+  "keywords": [
+    "npm",
+    "background",
+    "lightning",
+    "electricity",
+    "animation"
+  ],
+  "repository": {
+    "url": "https://github.com/omnedia/ngx-lightning"
+  },
+  "author": "Markus Block (markus.block@omnedia.com)",
+  "license": "MIT"
+}

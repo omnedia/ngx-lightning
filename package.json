@@ -1,7 +1,7 @@
 {
   "name": "@omnedia/ngx-lightning",
   "description": "An Angular library that renders a performant animated lightning/electricity effect using WebGL.",
-  "version": "3.0.0",
+  "version": "3.1.0",
   "peerDependencies": {
     "@angular/common": "^20.0.0",
     "@angular/core": "^20.0.0"

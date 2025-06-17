@@ -51,6 +51,7 @@ Use the component in your template:
     [intensity]="1.6"
     [size]="1.1"
     [flashTimeOut]="5000"
+    [transparent]="false"
     styleClass="custom-lightning"
   ></om-lightning>
 </div>
@@ -66,6 +67,7 @@ Use the component in your template:
   [intensity]="intensity"
   [size]="size"
   [flashTimeOut]="flashTimeOut"
+  [transparent]="transparent"
   styleClass="your-custom-class"
 ></om-lightning>
 ```
@@ -76,6 +78,7 @@ Use the component in your template:
 * `intensity` (optional): Lightning intensity/brightness (default: `1`).
 * `size` (optional): Size/scale of the lightning (default: `1`).
 * `flashTimeOut` (optional): TimeOut in ms between lightning animation. If undefined the animation is continuous. (default: `undefined`).
+* `transparent` (optional): Sets the background transparent (default: `false`).
 * `styleClass` (optional): Additional class for custom styling.
 
 ## Styling

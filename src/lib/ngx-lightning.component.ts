@@ -53,12 +53,18 @@ export class NgxLightningComponent implements AfterViewInit, OnDestroy {
     if (this.initialized) this.setup();
   }
 
+  @Input() set transparent(v: boolean) {
+    this.transparentSignal.set(v);
+    if (this.initialized) this.setup();
+  }
+
   hueSignal = signal(230);
   xOffsetSignal = signal(0);
   speedSignal = signal(1);
   intensitySignal = signal(1);
   sizeSignal = signal(1);
   flashTimeOutSignal = signal<number | undefined>(undefined);
+  transparentSignal = signal(false);
 
   private initialized = false;
   private running = false;
@@ -108,8 +114,15 @@ export class NgxLightningComponent implements AfterViewInit, OnDestroy {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const gl = canvas.getContext('webgl');
+    const gl = canvas.getContext('webgl', {
+      alpha: true,
+      premultipliedAlpha: false,
+    });
+
     if (!gl) return;
+
+    gl.clearColor(0, 0, 0, 0);
+    gl.clear(gl.COLOR_BUFFER_BIT);
 
     const vertexShaderSource = `
       attribute vec2 aPosition;
@@ -176,7 +189,13 @@ export class NgxLightningComponent implements AfterViewInit, OnDestroy {
         vec3 baseColor = hsv2rgb(vec3(uHue / 360.0, 0.7, 0.8));
         vec3 col = baseColor * pow(mix(0.0, 0.07, hash11(iTime * uSpeed)) / dist, 1.0) * uIntensity;
         col = pow(col, vec3(1.0));
-        fragColor = vec4(col, 1.0);
+
+        ${this.transparentSignal() ? `
+          float alpha = clamp(1.0 - dist * 3.0, 0.0, 1.0);
+          fragColor = vec4(col, alpha);
+        ` :
+      'fragColor = vec4(col, 1.0);'
+    }
       }
       void main() { mainImage(gl_FragColor, gl_FragCoord.xy); }
     `;
